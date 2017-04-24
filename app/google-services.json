@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "987918788169",
+    "firebase_url": "https://masandroidproject.firebaseio.com",
+    "project_id": "masandroidproject",
+    "storage_bucket": "masandroidproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987918788169:android:6ccf555280faa47c",
+        "android_client_info": {
+          "package_name": "traindge.masandroidproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987918788169-0s507sgfe72evt7shlc524on7btfjmts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "traindge.masandroidproject",
+            "certificate_hash": "ccab9d8581c2e5c039a146b76fcc001292f6990a"
+          }
+        },
+        {
+          "client_id": "987918788169-f5gv9cukda6foo1me4uaplnjak8nekj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlFl8gkfMS0tgXWaiB9tIEfKONVx4IdU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987918788169-f5gv9cukda6foo1me4uaplnjak8nekj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
