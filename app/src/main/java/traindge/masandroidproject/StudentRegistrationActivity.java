@@ -1,5 +1,7 @@
 package traindge.masandroidproject;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,13 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-import static traindge.masandroidproject.R.id.etStdParent;
-import static traindge.masandroidproject.R.id.etStudentEmail;
-
 public class StudentRegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TAG = "StudentRegistration";
     private EditText etStdParent;
-public static final String TAG="StudentRegistration";
     private EditText etparentName;
     private EditText etClgName;
     private FirebaseAuth mAuth;
@@ -50,11 +49,11 @@ public static final String TAG="StudentRegistration";
         setSupportActionBar(toolbar);
 
         etStudentName = (EditText) findViewById(R.id.etStudentName);
-        etStudentClass = (EditText)findViewById(R.id.etStudentClass);
+        etStudentClass = (EditText) findViewById(R.id.etStudentClass);
         etStdParent = (EditText) findViewById(R.id.etStdParent);
-        etStudentMobile = (EditText)findViewById(R.id.etStudentMobile);
-        etStudentEmail = (EditText)findViewById(R.id.etStudentEmail);
-        etClgName = (EditText)findViewById(R.id.etClgName);
+        etStudentMobile = (EditText) findViewById(R.id.etStudentMobile);
+        etStudentEmail = (EditText) findViewById(R.id.etStudentEmail);
+        etClgName = (EditText) findViewById(R.id.etClgName);
         etStudentPassword = (EditText) findViewById(R.id.etStudentPassword);
         btnStudentSubmit = (Button) findViewById(R.id.btnStudentSubmit);
 
@@ -67,17 +66,16 @@ public static final String TAG="StudentRegistration";
 
                 if (user != null) {
                     // User is signed in
-                    //// TODO: 4/5/2017 INTENT
-                    Log.d(TAG,"onAuthStatechanged:signed_in"+user.getUid());
+                    Intent subIntent = new Intent(StudentRegistrationActivity.this, ReportDaysActivity.class);
+                    startActivity(subIntent);
+                    finish();
+
                 } else {
                     // User is signed out
-                    Log.d(TAG,"onAuthStateChanged:signed_out");
                 }
                 // ...
             }
         };
-
-
 
         btnStudentSubmit.setOnClickListener(this);
     }
@@ -100,18 +98,24 @@ public static final String TAG="StudentRegistration";
     public void onClick(View v) {
 
         final String name = etStudentName.getText().toString();
-        final String studentclass= etStudentClass.getText().toString();
-        final String parentName=etStdParent.getText().toString();
-        final String mobileNumber= etStudentMobile.getText().toString();
-        final String email=etStudentEmail.getText().toString();
-        final String college= etClgName.getText().toString();
+        final String studentclass = etStudentClass.getText().toString();
+        final String parentName = etStdParent.getText().toString();
+        final String mobileNumber = etStudentMobile.getText().toString();
+        final String email = etStudentEmail.getText().toString();
+        final String college = etClgName.getText().toString();
         final String password = etStudentPassword.getText().toString();
 
-
+        Log.e(TAG, email);
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("please wait while we update");
+        dialog.show();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        dialog.setMessage("updating database");
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
@@ -119,27 +123,30 @@ public static final String TAG="StudentRegistration";
                         if (!task.isSuccessful()) {
                             Toast.makeText(StudentRegistrationActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
+                        if (task.isSuccessful()) {
+                            dialog.dismiss();
 
-                        String uid = task.getResult().getUser().getUid();
-                        HashMap<String, String> usermap= new HashMap<String, String>();
-                        usermap.put("name",name);
-                        usermap.put("class",studentclass);
-                        usermap.put("parent",parentName);
-                        usermap.put("mobile",mobileNumber);
-                        usermap.put("email",email);
-                        usermap.put("college",college);
-                        usermap.put("password",password);
+                            String uid = task.getResult().getUser().getUid();
+                            HashMap<String, String> usermap = new HashMap<String, String>();
+                            usermap.put("name", name);
+                            usermap.put("class", studentclass);
+                            usermap.put("parent", parentName);
+                            usermap.put("mobile", mobileNumber);
+                            usermap.put("email", email);
+                            usermap.put("college", college);
+                            usermap.put("password", password);
 
-                        FirebaseDatabase.getInstance().getReference("users").child(uid).setValue(usermap, new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                Toast.makeText(StudentRegistrationActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                            FirebaseDatabase.getInstance().getReference("users").child("students").child(uid).setValue(usermap, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                    Toast.makeText(StudentRegistrationActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
 
-                            }
-                        });
-
+                                }
+                            });
+                        }
                     }
                 });
     }

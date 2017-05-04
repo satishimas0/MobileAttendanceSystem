@@ -1,5 +1,6 @@
 package traindge.masandroidproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,14 +28,15 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Vi
     public static final String TAG = "TeacherRegistration";
     private EditText etTchrName;
     private EditText etTchrMobile;
+    private EditText etTchrEmail;
     private EditText etClgName;
     private EditText etHqualification;
     private EditText etTchrPassword;
     private Button btnTchrSubmit;
 
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
-    private EditText etTchrEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Vi
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Intent subIntent = new Intent(TeacherRegistrationActivity.this, ClassManagementSystemActivity.class);
+                    startActivity(subIntent);
+                    finish();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -88,50 +93,55 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.btnTchrSubmit:
-                Intent subIntent = new Intent(TeacherRegistrationActivity.this, ClassManagementSystemActivity.class);
-                startActivity(subIntent);
-                break;
-
-
-        }
-        final String email = etTchrEmail.getText().toString();
-        final String password = etTchrPassword.getText().toString();
-        final String TeacherName = etTchrName.getText().toString();
-        final String college = etClgName.getText().toString();
-        final String HQualification = etHqualification.getText().toString();
-        final String mobileNumber = etTchrMobile.getText().toString();
-        Log.e(TAG,email);
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(TeacherRegistrationActivity.this, R.string.auth_failed+task.getResult().toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        if (task.isSuccessful()) {
-                            String uid = task.getResult().getUser().getUid();
-                            HashMap<String, String> usermap = new HashMap<String, String>();
-                            usermap.put("name", TeacherName);
-                            usermap.put("mobile", mobileNumber);
-                            usermap.put("email", email);
-                            usermap.put("college", college);
-                            usermap.put("qualification", HQualification);
-                            usermap.put("password",password);
-                            FirebaseDatabase.getInstance().getReference("users").child("teachers").child(uid).setValue(usermap, new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                    Toast.makeText(TeacherRegistrationActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                final ProgressDialog dialog = new ProgressDialog(this);
+                dialog.setMessage("wait...");
+                dialog.show();
+                final String TeacherName = etTchrName.getText().toString();
+                final String mobileNumber = etTchrMobile.getText().toString();
+                final String email = etTchrEmail.getText().toString().trim();
+                final String college = etClgName.getText().toString();
+                final String HQualification = etHqualification.getText().toString();
+                final String password = etTchrPassword.getText().toString();
+                Log.e(TAG, email);
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                                dialog.setMessage("updating database");
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(TeacherRegistrationActivity.this, R.string.auth_failed + task.getResult().toString(), Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
                                 }
-                            });
-                        }
-                    }
-                });
+                                if (task.isSuccessful()) {
+                                    dialog.setMessage("it may take a while...");
+                                    String uid = task.getResult().getUser().getUid();
+                                    HashMap<String, String> usermap = new HashMap<String, String>();
+                                    usermap.put("name", TeacherName);
+                                    usermap.put("mobile", mobileNumber);
+                                    usermap.put("email", email);
+                                    usermap.put("college", college);
+                                    usermap.put("qualification", HQualification);
+                                    usermap.put("password", password);
+                                    FirebaseDatabase.getInstance().getReference("users").child("teachers").child(uid).setValue(usermap, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                            Toast.makeText(TeacherRegistrationActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                }
+
+                            }
+                        });
+                break;
+        }
+
     }
 }

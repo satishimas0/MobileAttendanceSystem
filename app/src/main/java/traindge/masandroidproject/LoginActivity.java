@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +30,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-
+    public static final String TAG = "Login";
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLogin;
     private Button btnForgtPassword;
     private Button btnSignUp;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,32 +51,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnForgtPassword = (Button) findViewById(R.id.btnForgtPassword);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
-        //mAuth = FirebaseAuth.getInstance();
-
-        // important part
-       //mAuthListener = new FirebaseAuth.AuthStateListener() {
-         //   @Override
-           // public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-             //   FirebaseUser user = firebaseAuth.getCurrentUser();
-               // if (user != null) {
+    //firebase instance
+        mAuth = FirebaseAuth.getInstance();
+        //important part
+       mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
                     // User is signed in
-                 //   Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                   // Intent homeIntent = new Intent(LoginActivity.this, FeedbackActivity.class);
-                    //startActivity(homeIntent);
-                    //finish();
-               // } else {
+                  Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Intent homeIntent = new Intent(LoginActivity.this, FeedbackActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                } else {
                     // User is signed out
-               //     Log.d(TAG, "onAuthStateChanged:signed_out");
-                //}
+                   Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
 
-         //   }
-        //};
+           }
+        };
 
         //final line
         btnSignUp.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        btnForgtPassword.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -85,6 +85,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnSignUp:
                 showOptions();
                 break;
+
+
+
+
+
         }
 
     }
@@ -99,7 +104,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                //// TODO: 4/5/2017 Student registration
                                 Intent subIntent = new Intent(LoginActivity.this, StudentRegistrationActivity.class);
                                 startActivity(subIntent);
                                 break;
@@ -122,6 +126,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private class SmartUser {
     }
 }
 

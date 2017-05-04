@@ -45,6 +45,22 @@
         <activity
             android:name=".NoticeSystemActivity"
             android:label="@string/title_activity_notice_system"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StudentNoticeActivity"
+            android:label="@string/title_activity_student_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoticeMessageActivity"
+            android:label="@string/title_activity_notice_message"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphReportActivity"
+            android:label="@string/title_activity_graph_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReportDaysActivity"
+            android:label="@string/title_activity_report_days"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

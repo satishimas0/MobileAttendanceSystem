@@ -3,8 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="traindge.masandroidproject.MainActivity">
     <item
+        android:id="@+id/report_menu"
+        android:orderInCategory="101"
+        android:title="Report"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/notice_menu"
+        android:orderInCategory="102"
+        android:title="Notice"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/about_menu"
+        android:orderInCategory="103"
+        android:title="About" />
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:orderInCategory="104"
+        android:title="Setting" />
+    <item
+        android:id="@+id/feedback_menu"
+        android:orderInCategory="105"
+        android:title="FeedBack" />
+    <item
+        android:id="@+id/logout_menu"
+        android:orderInCategory="106"
+        android:title="Logout" />
 </menu>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/actionModeSplitBackground"
+    android:background="@color/common_google_signin_btn_text_light_disabled"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="traindge.masandroidproject.TeacherRegistrationActivity"
     tools:layout_editor_absoluteX="0dp"
@@ -39,7 +39,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
-            android:background="@android:color/holo_blue_bright"
+            android:background="?attr/colorPrimary"
             android:gravity="center"
             android:text="Parent Registration"
             android:textSize="30sp"
@@ -60,7 +60,7 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="66dp"
             tools:layout_editor_absoluteY="65dp" />
@@ -78,7 +78,7 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="66dp"
             tools:layout_editor_absoluteY="65dp" />
@@ -96,9 +96,8 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
-            android:textStyle="bold"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="118dp" />
 
@@ -115,9 +114,8 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
-            android:textStyle="bold"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="169dp" />
 
@@ -134,9 +132,8 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
-            android:textStyle="bold"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="224dp" />
 
@@ -153,9 +150,8 @@
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp"
-            android:textStyle="bold"
             tools:layout_editor_absoluteX="88dp"
             tools:layout_editor_absoluteY="328dp" />
 
@@ -165,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="25dp"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@android:color/holo_blue_light"
             android:text="Submit"
             android:textSize="20sp"
             android:textStyle="bold"

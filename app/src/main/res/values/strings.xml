@@ -26,6 +26,25 @@
     <string name="auth_failed">Failed to register</string>
     <string name="title_activity_reg_option_page">RegOptionPage</string>
     <string name="title_activity_class_system">classSystemActivity</string>
-    <string name="title_activity_class_management_system">ClassManagementSYstemActivity</string>
+    <string name="title_activity_class_management_system">ClassManagementSystemActivity</string>
     <string name="title_activity_notice_system">NoticeSystemActivity</string>
+    <string name="title_activity_student_report">StudentReportActivity</string>
+    <string-array name="year">
+        <item>I sem</item>
+        <item>II sem</item>
+        <item>III sem</item>
+        <item>IV sem</item>
+        <item>V sem</item>
+        <item>VI sem</item>
+        <item>VII sem</item>
+        <item>VIII sem</item>
+        <item>1 year</item>
+        <item>2 year</item>
+        <item>3 year</item>
+        <item>none</item>
+    </string-array>
+    <string name="title_activity_notice_message">NoticeMessageActivity</string>
+    <string name="title_activity_graph_report">GraphReportActivity</string>
+    <string name="title_activity_report_days">ReportDaysActivity</string>
+
 </resources>
