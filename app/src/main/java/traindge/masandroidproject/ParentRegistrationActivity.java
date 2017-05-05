@@ -70,7 +70,7 @@ public class ParentRegistrationActivity extends AppCompatActivity implements Fir
 
     private void loadStudentsList() {
         studentlist = new ArrayList<>();
-        ProgressDialog dialog = new ProgressDialog(this);
+        final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("loading student list");
         dialog.setCancelable(false);
         dialog.show();
@@ -83,11 +83,13 @@ public class ParentRegistrationActivity extends AppCompatActivity implements Fir
                         studentlist.add(new StudentModel(snapshot));
                     }
                 }
+                dialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(ParentRegistrationActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }
