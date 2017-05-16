@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/tvStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/cPresent"
+        android:layout_toStartOf="@+id/cPresent"
+        android:padding="12dp"
+        android:text="Ravi Verma"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/cLeave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="4dp"
+        android:padding="12dp"
+        android:text="L"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    <CheckBox
+        android:id="@+id/cAbsent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="4dp"
+        android:layout_toLeftOf="@+id/cLeave"
+        android:layout_toStartOf="@+id/cLeave"
+        android:padding="12dp"
+        android:text="A"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    <CheckBox
+        android:id="@+id/cPresent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="4dp"
+        android:layout_toLeftOf="@+id/cAbsent"
+        android:layout_toStartOf="@+id/cAbsent"
+        android:padding="12dp"
+        android:text="P"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+</RelativeLayout>

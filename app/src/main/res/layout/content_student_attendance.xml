@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="traindge.masandroidproject.StudentAttendanceActivity"
+    tools:context="traindge.masandroidproject.attendance.StudentAttendanceActivity"
     tools:showIn="@layout/activity_student_attendance">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="12dp"
+        android:text="Take attendance by clicking on checkbox,after that click on save to confirm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAttendance"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/simple_attendance_layout"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="traindge.masandroidproject.attendance.ViewAttendanceActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <TextView
+            android:id="@+id/tvClassName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="Class name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <TextView
+            android:id="@+id/tvStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#333"
+            android:padding="16dp"
+            android:text="Ban Bhatta"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubject"
+            style="@style/summaryToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subject  |  Maths" />
+
+        <TextView
+            android:id="@+id/tvTiming"
+            style="@style/summaryToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timings 10:30" />
+
+        <TextView
+            android:id="@+id/tvTotalClasses"
+            style="@style/summaryToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Classes 16" />
+
+        <TextView
+            android:id="@+id/tvClassesAttended"
+            style="@style/summaryToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#6f8"
+            tools:text="Attended 14" />
+
+        <TextView
+            android:id="@+id/tvAbsent"
+            style="@style/summaryToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Absent 2"
+            android:textColor="#f99" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_view_attendance" />
+
+
+</android.support.design.widget.CoordinatorLayout>

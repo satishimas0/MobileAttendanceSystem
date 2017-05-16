@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="traindge.masandroidproject.AboutActivity">
+    tools:context="traindge.masandroidproject.ui.AboutActivity">
 
 </android.support.constraint.ConstraintLayout>

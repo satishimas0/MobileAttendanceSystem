@@ -22,6 +22,7 @@
     <string name="title_activity_student_registration">StudentRegistrationActivity</string>
     <string name="title_activity_teacher_registration">TeacherRegistrationActivity</string>
     <string name="send">send</string>
+    <string name="title_activity_profile">Profile</string>
     <string name="title_activity_parent_registration">ParentRegistrationActivity</string>
     <string name="auth_failed">Failed to register</string>
     <string name="title_activity_reg_option_page">RegOptionPage</string>
@@ -46,5 +47,9 @@
     <string name="title_activity_notice_message">NoticeMessageActivity</string>
     <string name="title_activity_graph_report">GraphReportActivity</string>
     <string name="title_activity_report_days">ReportDaysActivity</string>
+    <string name="title_activity_teacher_dashboard">TeacherDashboard</string>
+    <string name="title_activity_student_dashboard">Dashboard</string>
+    <string name="title_activity_parent_dashboard">Dashboard</string>
+    <string name="title_activity_view_attendance">View Attendance</string>
 
 </resources>
