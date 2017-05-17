@@ -151,7 +151,6 @@ public class StudentAttendanceActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.attendance_menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

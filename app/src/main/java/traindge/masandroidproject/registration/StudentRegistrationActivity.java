@@ -42,7 +42,6 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Vi
 
     public StudentRegistrationActivity() {
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

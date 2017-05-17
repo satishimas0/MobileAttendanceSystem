@@ -118,7 +118,6 @@ public class ClassCreationActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             });
-
         }
     }
 

@@ -85,7 +85,6 @@ public class StudentDashboard extends AppCompatActivity {
         if (stdClasses.size() > 0) {
             setupAdapter(stdClasses);
         }
-
     }
 
     private void setupAdapter(HashMap<String, CollegeClass> stdClasses) {

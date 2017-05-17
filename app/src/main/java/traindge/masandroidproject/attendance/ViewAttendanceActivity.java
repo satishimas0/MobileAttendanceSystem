@@ -150,5 +150,4 @@ public class ViewAttendanceActivity extends AppCompatActivity {
             }
         });
     }
-
 }
