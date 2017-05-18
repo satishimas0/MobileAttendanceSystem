@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <TextView
@@ -46,6 +47,8 @@
             style="@style/summaryToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
             android:text="Subject  |  Maths" />
 
         <TextView
@@ -53,6 +56,8 @@
             style="@style/summaryToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
             android:text="Timings 10:30" />
 
         <TextView
@@ -60,6 +65,8 @@
             style="@style/summaryToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
             android:text="Total Classes 16" />
 
         <TextView
@@ -67,6 +74,8 @@
             style="@style/summaryToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
             android:text="TextView"
             android:textColor="#6f8"
             tools:text="Attended 14" />
@@ -76,6 +85,8 @@
             style="@style/summaryToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
             android:text="Absent 2"
             android:textColor="#f99" />
 

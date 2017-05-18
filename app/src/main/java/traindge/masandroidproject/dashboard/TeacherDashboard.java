@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import traindge.masandroidproject.attendance.ClassCreationActivity;
+import traindge.masandroidproject.notice.NoticeMessageActivity;
 import traindge.masandroidproject.ui.FeedbackActivity;
 import traindge.masandroidproject.notice.NoticeSystemActivity;
 import traindge.masandroidproject.R;
@@ -29,6 +31,9 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
 
     public static final String TEACHER = "teacher";
     public static final String CLASS_UNIQUE_KEY = "traindge.masandroidproject.classkey";
+    public static final String CLASS_NAME_KEY ="traindge.masandroidproject.class";
+    public static final String SUBJECT_NAME_KEY ="traindge.masandroidproject.subject";
+
     private FirebaseRecyclerAdapter<CollegeClass, CollegeClassHolder> mAdapter;
     private String uid;
 
@@ -47,7 +52,7 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("classes").child(uid);
         mAdapter = new FirebaseRecyclerAdapter<CollegeClass, CollegeClassHolder>(CollegeClass.class, R.layout.simple_class_item, CollegeClassHolder.class, mRef) {
             @Override
-            protected void populateViewHolder(CollegeClassHolder viewHolder, CollegeClass model, final int position) {
+            protected void populateViewHolder(CollegeClassHolder viewHolder, final CollegeClass model, final int position) {
                 viewHolder.setClassName(model.getName());
                 viewHolder.row.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -56,6 +61,19 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
                         intent.putExtra(CLASS_UNIQUE_KEY, getRef(position).getKey());
                         startActivity(intent);
 
+                    }
+                });
+                viewHolder.row.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Toast.makeText(TeacherDashboard.this, "add a Notice", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TeacherDashboard.this, NoticeSystemActivity.class);
+                        intent.putExtra(CLASS_UNIQUE_KEY, getRef(position).getKey());
+                        intent.putExtra(CLASS_NAME_KEY, model.getName());
+                        intent.putExtra(SUBJECT_NAME_KEY, model.getSubject());
+                        startActivity(intent);
+
+                        return true;
                     }
                 });
             }
@@ -89,7 +107,7 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
                 startActivity(IntentHome);
                 break;
             case R.id.notice_menu:
-                Intent IntentHom = new Intent(TeacherDashboard.this, NoticeSystemActivity.class);
+                Intent IntentHom = new Intent(TeacherDashboard.this, NoticeMessageActivity.class);
                 startActivity(IntentHom);
                 break;
             case R.id.about_menu:

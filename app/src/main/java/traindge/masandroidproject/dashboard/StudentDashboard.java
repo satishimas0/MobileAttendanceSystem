@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import traindge.masandroidproject.R;
 import traindge.masandroidproject.attendance.StudentAttendanceActivity;
 import traindge.masandroidproject.attendance.ViewAttendanceActivity;
 import traindge.masandroidproject.models.CollegeClass;
+import traindge.masandroidproject.notice.NoticeMessageActivity;
 
 import static traindge.masandroidproject.dashboard.TeacherDashboard.CLASS_UNIQUE_KEY;
 
@@ -141,10 +144,25 @@ public class StudentDashboard extends AppCompatActivity {
             row = itemView.findViewById(R.id.llwrapper);
             mClassName = (TextView) itemView.findViewById(R.id.tvClass);
         }
-
         public void setClassName(String name) {
             mClassName.setText(name);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dashboard_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.notices:
+                startActivity(new Intent(this, NoticeMessageActivity.class));
+        }
+        return true;
     }
 }

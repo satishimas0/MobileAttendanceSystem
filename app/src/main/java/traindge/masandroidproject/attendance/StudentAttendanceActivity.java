@@ -83,9 +83,9 @@ public class StudentAttendanceActivity extends AppCompatActivity {
                 CollegeClass cClass = dataSnapshot.getValue(CollegeClass.class);
                 tvClassNameAtte.setText(cClass.getName());
                 int year = Calendar.getInstance().get(Calendar.YEAR);
-                int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+                int month = Calendar.getInstance().get(Calendar.MONTH);
                 int date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                tvDateAtte.setText("" + date + "/" + month + "/" + year);
+                tvDateAtte.setText("" + date + "/" + month+1 + "/" + year);
                 setUpStudentList(cClass.getStudents());
             }
 
@@ -107,25 +107,12 @@ public class StudentAttendanceActivity extends AppCompatActivity {
         if (attendanceArraySet.isEmpty() && attendanceArraySet.size() < rvAttendance.getAdapter().getItemCount()) {
             Toast.makeText(this, "take attendance of all student", Toast.LENGTH_SHORT).show();
         } else {
-            int p = 0, a = 0, l = 0;
+
             HashMap<String, Integer> data = new HashMap<>();
             for (Attendance attendance : attendanceArraySet) {
-                switch (attendance.getStatus()) {
-                    case 1:
-                        p++;
-                        break;
-                    case 2:
-                        a++;
-                        break;
-                    default:
-                        l++;
-                        break;
-                }
                 data.put(attendance.getStudentId(), attendance.getStatus());
             }
-            final int finalP = p;
-            final int finalA = a;
-            final int finalL = l;
+
             dayRef.setValue(data, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -138,7 +125,7 @@ public class StudentAttendanceActivity extends AppCompatActivity {
                                 startActivity(new Intent(StudentAttendanceActivity.this, TeacherDashboard.class));
                                 finish();
                             }
-                        }).setTitle("Summary").setMessage("Total present "+ finalP+"\nTotal absent "+ finalA+"\nTotal on leave "+ finalL).create();
+                        }).setTitle("Completed").setMessage("Todays attendance has been taken! have a nice day").create();
                         dialog.show();
                     }
                 }

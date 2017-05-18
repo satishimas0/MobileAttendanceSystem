@@ -57,7 +57,7 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
 
-    <TextView
+    <EditText
         android:id="@+id/tvfeedbackMsg"
         android:layout_width="0dp"
         android:layout_height="200dp"
