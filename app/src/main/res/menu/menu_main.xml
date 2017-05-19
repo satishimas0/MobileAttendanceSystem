@@ -2,11 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="traindge.masandroidproject.ui.MainActivity">
-    <item
-        android:id="@+id/report_menu"
-        android:orderInCategory="101"
-        android:title="Report"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/notice_menu"
         android:orderInCategory="102"

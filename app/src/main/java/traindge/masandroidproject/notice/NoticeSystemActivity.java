@@ -67,8 +67,8 @@ public class NoticeSystemActivity extends AppCompatActivity implements View.OnCl
         }
         HashMap<String, Object> o = new HashMap<>();
         o.put(TEXT,tvMsgByTeacher.getText().toString());
-        o.put(CLASS,tvMsgByTeacher.getText().toString());
-        o.put(SUBJECT,tvMsgByTeacher.getText().toString());
+        o.put(CLASS,etClass.getText().toString());
+        o.put(SUBJECT,etSubject.getText().toString());
         FirebaseDatabase.getInstance().getReference("notices").push().setValue(o, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

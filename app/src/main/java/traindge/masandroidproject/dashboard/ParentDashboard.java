@@ -58,12 +58,35 @@ public class ParentDashboard extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("wait...");
         dialog.show();
+        //loadClassData(dialog);
+        FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    String studentName = dataSnapshot.child("parent").child(uid).child("student").getValue(String.class);
+                    for (DataSnapshot snapshot : dataSnapshot.child(STUDENTS).getChildren()) {
+                        if (snapshot.child("name").getValue(String.class).equals(studentName)){
+                            String studentID = snapshot.getKey();
+                            loadClassData(dialog,studentID);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void loadClassData(final ProgressDialog dialog, final String studentID) {
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("classes");
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dialog.dismiss();
-                handleLoadedClasses(dataSnapshot);
+                handleLoadedClasses(dataSnapshot,studentID);
             }
 
             @Override
@@ -76,10 +99,10 @@ public class ParentDashboard extends AppCompatActivity {
         rvClassList.setAdapter(mAdapter);
     }
 
-    private void handleLoadedClasses(DataSnapshot dataSnapshot) {
+    private void handleLoadedClasses(DataSnapshot dataSnapshot, String studentID) {
         for (DataSnapshot teacherClasses : dataSnapshot.getChildren()) {
             for (DataSnapshot classSnap : teacherClasses.getChildren()) {
-                if (classSnap.child(STUDENTS).hasChild(uid)) {
+                if (classSnap.child(STUDENTS).hasChild(studentID)) {
                     stdClasses.put(classSnap.getKey(),classSnap.getValue(CollegeClass.class));
                 }
             }

@@ -65,7 +65,7 @@ public class ReportDaysActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                        Toast.makeText(ReportDaysActivity.this, "no found any class", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportDaysActivity.this, "not found any class", Toast.LENGTH_SHORT).show();
                     }
                 }
 

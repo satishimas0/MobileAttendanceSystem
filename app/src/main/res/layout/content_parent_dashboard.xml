@@ -9,7 +9,9 @@
     tools:showIn="@layout/activity_parent_dashboard">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvClassList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/simple_student_class_item" />
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:listitem="@layout/simple_student_class_item"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp" />
 </android.support.constraint.ConstraintLayout>

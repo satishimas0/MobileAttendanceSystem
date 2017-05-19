@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +37,7 @@ public class NoticeMessageActivity extends AppCompatActivity {
 
     private RecyclerView rvNotices;
     private DatabaseReference notices;
+    List<Notice> list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,32 +49,36 @@ public class NoticeMessageActivity extends AppCompatActivity {
         rvNotices = (RecyclerView) findViewById(R.id.rvNotices);
         rvNotices.setHasFixedSize(false);
         rvNotices.setLayoutManager(new LinearLayoutManager(this));
-        rvNotices.setAdapter(new StudentClassAdapter());
+        notices.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        list.add(dataSnapshot.getValue(Notice.class));
+
+                    }
+                    if (list.size() > 0) {
+                        rvNotices.setAdapter(new StudentClassAdapter(list));
+                    } else {
+                        Toast.makeText(NoticeMessageActivity.this, "no notice available now", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     class StudentClassAdapter extends RecyclerView.Adapter<CollegeClassHolder> {
 
-        List<Notice> list = new ArrayList();
 
-        public StudentClassAdapter() {
+        private final List<Notice> list;
 
-            notices.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.hasChildren()) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            list.add(dataSnapshot.getValue(Notice.class));
-                            notifyDataSetChanged();
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
+        public StudentClassAdapter(List<Notice> list) {
+            this.list = list;
         }
 
         @Override
@@ -82,15 +88,15 @@ public class NoticeMessageActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(CollegeClassHolder holder, final int position) {
-            holder.tvMsg.setText(list.get(position).getText());
-            holder.mClassName.setText(list.get(position).getClazz());
-            holder.tvSubject.setText(list.get(position).getSubject());
+            holder.tvMsg.setText(NoticeMessageActivity.this.list.get(position).getText());
+            holder.mClassName.setText(NoticeMessageActivity.this.list.get(position).getClazz());
+            holder.tvSubject.setText(NoticeMessageActivity.this.list.get(position).getSubject());
 
         }
 
         @Override
         public int getItemCount() {
-            return list.size();
+            return NoticeMessageActivity.this.list.size();
         }
     }
 

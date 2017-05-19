@@ -37,7 +37,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingStart="16dp"
-            android:text="click to take attendance" />
+            android:text="click to take attendance or long press to see report" />
 
         <TextView
             android:id="@+id/textView6"

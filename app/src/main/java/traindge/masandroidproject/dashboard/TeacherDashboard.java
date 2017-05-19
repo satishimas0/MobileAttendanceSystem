@@ -1,8 +1,10 @@
 package traindge.masandroidproject.dashboard;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import traindge.masandroidproject.attendance.ClassCreationActivity;
 import traindge.masandroidproject.notice.NoticeMessageActivity;
+import traindge.masandroidproject.reports.GraphReportActivity;
 import traindge.masandroidproject.ui.FeedbackActivity;
 import traindge.masandroidproject.notice.NoticeSystemActivity;
 import traindge.masandroidproject.R;
@@ -67,15 +71,42 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
                     @Override
                     public boolean onLongClick(View v) {
                         Toast.makeText(TeacherDashboard.this, "add a Notice", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TeacherDashboard.this, NoticeSystemActivity.class);
-                        intent.putExtra(CLASS_UNIQUE_KEY, getRef(position).getKey());
-                        intent.putExtra(CLASS_NAME_KEY, model.getName());
-                        intent.putExtra(SUBJECT_NAME_KEY, model.getSubject());
-                        startActivity(intent);
+                        AlertDialog dialog= new AlertDialog.Builder(TeacherDashboard.this)
+                                .setAdapter(new ArrayAdapter<String>(TeacherDashboard.this, android.R.layout.simple_list_item_1, new String[]{"view report", "create notice"}), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                      switch (which){
+                                          case 0:
+                                              showReport(position, model);
+                                              break;
+                                          case 1:
+                                              showNotices(position, model);
+                                              break;
+                                      }
+                                    }
+                                }).setTitle("Available options").create();
+                        dialog.show();
+
 
                         return true;
                     }
                 });
+            }
+
+            private void showReport(int position, CollegeClass model) {
+                Intent intent = new Intent(TeacherDashboard.this, GraphReportActivity.class);
+                intent.putExtra(CLASS_UNIQUE_KEY, getRef(position).getKey());
+                intent.putExtra(CLASS_NAME_KEY, model.getName());
+                intent.putExtra(SUBJECT_NAME_KEY, model.getSubject());
+                startActivity(intent);
+            }
+
+            private void showNotices(int position, CollegeClass model) {
+                Intent intent = new Intent(TeacherDashboard.this, NoticeSystemActivity.class);
+                intent.putExtra(CLASS_UNIQUE_KEY, getRef(position).getKey());
+                intent.putExtra(CLASS_NAME_KEY, model.getName());
+                intent.putExtra(SUBJECT_NAME_KEY, model.getSubject());
+                startActivity(intent);
             }
 
         };
@@ -102,10 +133,6 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.report_menu:
-                Intent IntentHome = new Intent(TeacherDashboard.this, ReportDaysActivity.class);
-                startActivity(IntentHome);
-                break;
             case R.id.notice_menu:
                 Intent IntentHom = new Intent(TeacherDashboard.this, NoticeMessageActivity.class);
                 startActivity(IntentHom);
@@ -113,8 +140,8 @@ public class TeacherDashboard extends AppCompatActivity implements View.OnClickL
             case R.id.about_menu:
                 break;
             case R.id.feedback_menu:
-                IntentHome = new Intent(TeacherDashboard.this, FeedbackActivity.class);
-                startActivity(IntentHome);
+                Intent i = new Intent(TeacherDashboard.this, FeedbackActivity.class);
+                startActivity(i);
                 break;
 
         }
